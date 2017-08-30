@@ -60,8 +60,6 @@ public class Sql2oPlantDao implements PlantDao {
 
     //Update
 
-
-
     //Delete
     @Override
     //will want to delete from all joined tables
