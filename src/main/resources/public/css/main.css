@@ -1,12 +1,17 @@
 a, a:hover, a:active, a:visited {
-    color: white;
+    color: pink;
+}
+
+#listItem li {
+    list-style-type: none;
 }
 
 input[type=text] {
     background-color: #3CBC8D;
     color: white;
 }
- body {
+
+body {
       background-image: url("/images/background.jpg");
       background-size: cover;
       background-repeat: no-repeat;
@@ -29,3 +34,4 @@ html {
     color: white;
 
 }
+
