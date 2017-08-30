@@ -1,0 +1,20 @@
+{{#partial "content"}}
+
+    <h1>Welcome to the Garden Guide</h1>
+    <br>
+    <h4>Plan your season with the Garden Guide.  Select a plant and see the best time of the year for planting it, or pick a time of year to see what to plant in your garden.</h4>
+
+    <form action="/plants/{{plantId}}" method="post">
+
+        <div class="form-group">
+            <select name="plantName" id="plantName">
+                {{#each plantName}}
+                    <option value="{{plantName}}">{{plantName}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <a href="/plants/{{plants.id}}/"><button type="button" class="btn btn-default btn-sm">Test</button></a><br>
+    </form>
+{{/partial}}
+
+{{> layout.hbs}}
