@@ -3,6 +3,9 @@ import dao.Sql2oPlantDao;
 import models.Plant;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+
+import java.util.List;
+
 import static spark.Spark.*;
 
 public class App {
@@ -25,12 +28,15 @@ public class App {
 
     //----------Plant API EndPoints----------//
 
-    // Enter new Recipe cards
+    // only admin: Endpoint to Enter Plant JSON file
     post("/gardenguideapi/plants/new", "application/json", (req, res) -> {
-      Plant plant = gson.fromJson(req.body(), Plant.class);
-      plantDao.add(plant);
+      Plant[] plantList = gson.fromJson(req.body(), Plant[].class);
+      for (Plant plant: plantList) {
+        plantDao.add(plant);
+      }
       res.status(201);
-      return gson.toJson(plant);
+
+      return gson.toJson(plantList);
     });
 
     // Get All Recipe cards
