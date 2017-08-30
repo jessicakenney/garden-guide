@@ -1,16 +1,18 @@
 package models;
 
+import java.util.Date;
+
 /**
  * Created by Guest on 8/28/17.
  */
 public class Event {
     private int id;
-    private String startDate;
-    private String endDate;
+    private Date startDate;
+    private Date endDate;
     private String type;
     private int plantId;
 
-    public Event(String startDate,String endDate, String type, int plantId){
+    public Event(Date startDate,Date endDate, String type, int plantId){
         this.startDate = startDate;
         this.endDate = endDate;
         this.type = type;
@@ -25,19 +27,19 @@ public class Event {
         this.id = id;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

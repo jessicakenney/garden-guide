@@ -3,6 +3,7 @@ import dao.Sql2oPlantDao;
 import models.Plant;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -26,8 +27,28 @@ public class App {
         Sql2o sql2o = new Sql2o(connectionString, null, null);
         plantDao = new Sql2oPlantDao(sql2o);
         conn = sql2o.open();
+      
+    //----------Plant API EndPoints----------//
+
+    // only admin: Endpoint to Enter Plant JSON file
+    post("/gardenguideapi/plants/new", "application/json", (req, res) -> {
+      Plant[] plantList = gson.fromJson(req.body(), Plant[].class);
+      for (Plant plant: plantList) {
+        plantDao.add(plant);
+      }
+      res.status(201);
+
+      return gson.toJson(plantList);
+    });
+
+    // Get All Recipe cards
+    get("/gardenguideapi/plants", "application/json", (req, res) -> {
+      return gson.toJson(plantDao.getAll());
+    });
 
 
+
+  
         // show home page (root route)
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<String, Object>();
@@ -70,3 +91,5 @@ public class App {
     }
 
 }
+
+

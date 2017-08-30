@@ -53,8 +53,44 @@ INSERT INTO plants (plantName,daysToMaturity,plantSpacing,rowSpacing) VALUE ("ja
 DROP DATABASE garden_guide
 \q
 
+###############################################
+DATABASE GENERATION
+###############################################
+httpie:
+####################
+http GET localhost:4567/gardenguideapi/plants
+http POST localhost:4567/gardenguideapi/plants/new < plants.json
 
+###  psql for garden_guide_test  ############
+momma=# \c garden_guide
+You are now connected to database "garden_guide" as user "momma".
+garden_guide=# \dt
+No relations found.
+garden_guide=# CREATE DATABASE garden_guide_test WITH TEMPLATE garden_guide;
+CREATE TABLE plants (id serial PRIMARY KEY, plantName varchar, daysToMaturity varchar, plantSpacing varchar, rowSpacing varchar);
+CREATE TABLE events (id serial PRIMARY KEY, startDate DATE,endDate DATE, type VARCHAR, plantId INT);
 
+\c to orig Database
+DROP DATABASE name_of_database;
+$ pg_dump name_of_database > gardenguide.sql
+
+################################################
+#Restore using gardenguide.sql
+
+clone repository
+
+in psql:
+CREATE DATABASE garden_guide;
+
+#From commandline:
+$ psql garden_guide < gardenguide.sql
+
+#From psql : sanity check
+\c your_database_name
+\dt
+TABLE table_name;
+
+then run app.
 ################################################
 
 
