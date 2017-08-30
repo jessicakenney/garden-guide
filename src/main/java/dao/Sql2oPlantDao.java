@@ -28,7 +28,7 @@ public class Sql2oPlantDao implements PlantDao {
     public void add(Plant plant) {
         String sql = "INSERT INTO plants (plantName,daysToMaturity,plantSpacing,rowSpacing) VALUES (:plantName,:daysToMaturity,:plantSpacing,:rowSpacing)";
         try (Connection con = sql2o.open()) {
-            int id = (int) con.createQuery(sql)
+            int id = (int) con.createQuery(sql,true)
                     .bind(plant)
                     .executeUpdate()
                     .getKey();

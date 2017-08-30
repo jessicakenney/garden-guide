@@ -53,7 +53,22 @@ INSERT INTO plants (plantName,daysToMaturity,plantSpacing,rowSpacing) VALUE ("ja
 DROP DATABASE garden_guide
 \q
 
+###############################################3
+http GET localhost:4567/gardenguideapi/plants
+http POST localhost:4567/gardenguideapi/plants/new < plants.json
 
+###  psql for garden_guide_test  ############
+momma=# \c garden_guide
+You are now connected to database "garden_guide" as user "momma".
+garden_guide=# \dt
+No relations found.
+garden_guide=# CREATE DATABASE garden_guide_test WITH TEMPLATE garden_guide;
+CREATE TABLE plants (id serial PRIMARY KEY, plantName varchar, daysToMaturity varchar, plantSpacing varchar, rowSpacing varchar);
+CREATE TABLE events (id serial PRIMARY KEY, startDate DATE,endDate DATE, type VARCHAR, plantId INT);
+
+
+DROP DATABASE name_of_database;
+$ pg_dump name_of_database > outfile
 
 ################################################
 

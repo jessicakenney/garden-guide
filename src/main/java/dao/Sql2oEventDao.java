@@ -21,7 +21,7 @@ public class Sql2oEventDao implements EventDao{
     public void add(Event event) {
         String sql = "INSERT INTO events (startDate,endDate,type,plantId) VALUES (:startDate,:endDate,:type,:plantId)";
         try (Connection con = sql2o.open()) {
-            int id = (int) con.createQuery(sql)
+            int id = (int) con.createQuery(sql,true)
                     .bind(event)
                     .executeUpdate()
                     .getKey();
