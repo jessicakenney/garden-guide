@@ -82,6 +82,13 @@ public class App {
             return new ModelAndView(model, "endpoints.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //get: show conversion page
+        get("/conversions", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "conversions.hbs");
+        }, new HandlebarsTemplateEngine());
+
+
 
         //get: show plant detail page
         get("/plants/:id", (req, res) -> {
