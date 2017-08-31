@@ -31,7 +31,9 @@ public class Sql2oPlantDaoTest {
   public void tearDown() throws Exception {
     conn.close();
     String sql = "DELETE FROM plants *;";
+    String sql2 = "ALTER SEQUENCE plants_id_seq RESTART WITH 1;";
     conn.createQuery(sql).executeUpdate();
+    conn.createQuery(sql2).executeUpdate();
     //then need to restart the key
   }
 

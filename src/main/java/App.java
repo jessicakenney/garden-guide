@@ -1,5 +1,8 @@
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import dao.Sql2oEventDao;
 import dao.Sql2oPlantDao;
+import models.Event;
 import models.Plant;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -12,20 +15,23 @@ import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.get;
+import static spark.Spark.post;
 import static spark.Spark.staticFileLocation;
 
 public class App {
     public static void main(String[] args) {
         staticFileLocation("/public");
         Sql2oPlantDao plantDao;
+        Sql2oEventDao eventDao;
         Connection conn;
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("MM/dd/yyyy").create();
 
         //String connectionString = "jdbc:h2:~/recipe-box.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
         String connectionString = ("jdbc:postgresql://localhost:5432/garden_guide");
 
         Sql2o sql2o = new Sql2o(connectionString, null, null);
         plantDao = new Sql2oPlantDao(sql2o);
+        eventDao = new Sql2oEventDao(sql2o);
         conn = sql2o.open();
       
     //----------Plant API EndPoints----------//
@@ -39,6 +45,16 @@ public class App {
       res.status(201);
 
       return gson.toJson(plantList);
+    });
+
+    post("/gardenguideapi/events/new", "application/json", (req, res) -> {
+        Event[] eventList = gson.fromJson(req.body(), Event[].class);
+        for (Event event: eventList) {
+            eventDao.add(event);
+        }
+        res.status(201);
+
+        return gson.toJson(eventList);
     });
 
     // Get All Recipe cards

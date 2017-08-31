@@ -31,9 +31,10 @@ public class Sql2oEventDaoTest {
     @After
     public void tearDown() throws Exception {
         conn.close();
-        //String sql = "DELETE FROM events *;";
-        //conn.createQuery(sql).executeUpdate();
-        //restart the id
+        String sql = "DELETE FROM events *;";
+        String sql2 = "ALTER SEQUENCE events_id_seq RESTART WITH 1;";
+        conn.createQuery(sql).executeUpdate();
+        conn.createQuery(sql2).executeUpdate();
     }
 
     //helper

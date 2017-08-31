@@ -1,5 +1,8 @@
 package models;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -12,11 +15,11 @@ public class Event {
     private String type;
     private int plantId;
 
-    public Event(Date startDate,Date endDate, String type, int plantId){
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.type = type;
-        this.plantId = plantId;
+    public Event(Date startDate, Date endDate, String type, int plantId){
+       this.startDate = startDate;
+       this.endDate = endDate;
+       this.type = type;
+       this.plantId = plantId;
     }
 
     public int getId() {
@@ -40,7 +43,7 @@ public class Event {
     }
 
     public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+        this.startDate = startDate;
     }
 
     public String getType() {
