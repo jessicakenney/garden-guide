@@ -83,9 +83,12 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
 
-        //get: show careers page
-        get("/plantDetail/:id", (req, res) -> {
+        //get: show plant detail page
+        get("/plants/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+            int idOfPlantToFind = Integer.parseInt(req.params("id"));
+            Plant plants = plantDao.findById(idOfPlantToFind);
+            model.put("plants", plants);
             return new ModelAndView(model, "plantDetail.hbs");
         }, new HandlebarsTemplateEngine());
 
