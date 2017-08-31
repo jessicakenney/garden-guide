@@ -48,20 +48,20 @@ public class App {
           return gson.toJson(plantList);
         });
 
-    post("/gardenguideapi/events/new", "application/json", (req, res) -> {
-        Event[] eventList = gson.fromJson(req.body(), Event[].class);
-        for (Event event: eventList) {
-            eventDao.add(event);
-        }
-        res.status(201);
+        post("/gardenguideapi/events/new", "application/json", (req, res) -> {
+            Event[] eventList = gson.fromJson(req.body(), Event[].class);
+            for (Event event: eventList) {
+                eventDao.add(event);
+            }
+            res.status(201);
 
-        return gson.toJson(eventList);
-    });
+            return gson.toJson(eventList);
+        });
 
-    // Get All Recipe cards
-    get("/gardenguideapi/plants", "application/json", (req, res) -> {
-      return gson.toJson(plantDao.getAll());
-    });
+        // Get All Plants
+        get("/gardenguideapi/plants", "application/json", (req, res) -> {
+          return gson.toJson(plantDao.getAll());
+        });
 
         // Get Plant Data by name of plant
         get("/gardenguideapi/plants/:plantName", "application/json", (req, res) -> {
