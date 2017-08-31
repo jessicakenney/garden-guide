@@ -6,12 +6,13 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Guest on 8/30/17.
  */
-public class Sql2oGardenPlantDao {
+public class Sql2oGardenPlantDao implements GardenPlantDao {
     private final Sql2o sql2o;
 
     public Sql2oGardenPlantDao(Sql2o sql2o)  {
@@ -22,7 +23,7 @@ public class Sql2oGardenPlantDao {
     // Create
     @Override
     public void add(GardenPlant gardenPlant) {
-        String sql = "INSERT INTO gardenplants (isPlanted,datePlanted,gardenId) VALUES (:isPlanted,:datePlanted,:gardenId)";
+        String sql = "INSERT INTO gardenplants (plantId,gardenId) VALUES (:plantId,:gardenId)";
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql,true)
                     .bind(gardenPlant)
@@ -51,6 +52,23 @@ public class Sql2oGardenPlantDao {
             return con.createQuery(sql)
                     .addParameter("id", id)
                     .executeAndFetchFirst(GardenPlant.class);
+        }
+    }
+
+    //Update:
+    @Override
+    public void update(int id, int plantId, int gardenId, Boolean isPlanted, Date datePlanted ) {
+        String sql = "UPDATE gardenplants SET (id,plantId,gardenId,isPlanted,datePlanted)=(:id,:plantId,:gardenId,:isPlanted,:datePlanted)) WHERE id=:id";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .addParameter("plantId", plantId)
+                    .addParameter("gardenId", gardenId)
+                    .addParameter("isPlanted", isPlanted)
+                    .addParameter("datePlanted", datePlanted)
+                    .executeUpdate();
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
         }
     }
 
