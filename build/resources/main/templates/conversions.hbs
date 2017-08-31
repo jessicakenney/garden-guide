@@ -1,0 +1,28 @@
+{{#partial "content"}}
+    <div class="well" id="conversions">
+        <h2>Conversion Page</h2>
+        <h2>Weight Converter</h2>
+        <p>Type a value in the Pounds field to convert the value to Kilograms:</p>
+        <p>
+            <label>Pounds</label>
+            <input id="inputPounds" type="number" placeholder="Pounds" oninput="weightConverter(this.value)" onchange="weightConverter(this.value)">
+        </p>
+        <p>Kilograms: <span id="outputKilograms"></span></p>
+        <p>Ounces: <span id="outputOunces"></span></p>
+        <p>Grams: <span id="outputGrams"></span></p>
+        <p>Stones: <span id="outputStones"></span></p>
+
+        <script>
+function weightConverter(valNum) {
+  document.getElementById("outputKilograms").innerHTML=valNum/2.2046;
+  document.getElementById("outputGrams").innerHTML=valNum/0.0022046;
+  document.getElementById("outputOunces").innerHTML=valNum*16;
+  document.getElementById("outputStones").innerHTML=valNum*0.071429;
+}
+</script>
+
+
+    </div>
+{{/partial}}
+
+{{> layout.hbs}}
