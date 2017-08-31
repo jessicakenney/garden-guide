@@ -290,7 +290,7 @@ SELECT pg_catalog.setval('events_id_seq', 148, true);
 
 COPY plants (id, plantname, daystomaturity, plantspacing, rowspacing, image) FROM stdin;
 1	Artichoke	85	24	54	/images/plants/artichoke.jpg
-2	Arugula	40	5	12	/images/plants/arugala.jpg
+2	Arugula	40	5	12	/images/plants/arugula.jpg
 3	Asian Greens	45	9	21	/images/plants/asian_greens.jpg
 4	Asparagus	730	12	60	/images/plants/asparagus.jpg
 5	Basil	80	21	12	/images/plants/basil.jpg
