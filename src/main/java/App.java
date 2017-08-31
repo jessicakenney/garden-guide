@@ -116,8 +116,10 @@ public class App {
         get("/plants/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfPlantToFind = Integer.parseInt(req.params("id"));
-            Plant plants = plantDao.findById(idOfPlantToFind);
-            model.put("plants", plants);
+            Plant plant = plantDao.findById(idOfPlantToFind);
+            List<Event> events = eventDao.getAllByPlantId(idOfPlantToFind);
+            model.put("plant", plant);
+            model.put("events", events);
             return new ModelAndView(model, "plantDetail.hbs");
         }, new HandlebarsTemplateEngine());
 

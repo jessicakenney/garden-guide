@@ -43,7 +43,7 @@ public class Event {
     }
 
     public void setEndDate(Date endDate) {
-        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public String getType() {
