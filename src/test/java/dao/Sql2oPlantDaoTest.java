@@ -20,8 +20,8 @@ public class Sql2oPlantDaoTest {
 
   @Before
   public void setUp() throws Exception {
-    //String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-    String connectionString = ("jdbc:postgresql://localhost:5432/garden_guide_test");
+    String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
+    //String connectionString = ("jdbc:postgresql://localhost:5432/garden_guide_test");
     Sql2o sql2o = new Sql2o(connectionString, null, null);
     plantDao = new Sql2oPlantDao(sql2o);
     conn = sql2o.open();
@@ -30,8 +30,9 @@ public class Sql2oPlantDaoTest {
   @After
   public void tearDown() throws Exception {
     conn.close();
-    String sql = "DELETE FROM plants *;";
-    conn.createQuery(sql).executeUpdate();
+    //need for postgres
+    //String sql = "DELETE FROM plants *;";
+    //conn.createQuery(sql).executeUpdate();
     //then need to restart the key
   }
 
@@ -40,7 +41,8 @@ public class Sql2oPlantDaoTest {
     int daysToMaturity = 4;
     String plantSpacing = "1foot";
     String rowSpacing = "2foot";
-    return new Plant(plantName,daysToMaturity,plantSpacing,rowSpacing);
+    String image = "url/swisschard.jpg";
+    return new Plant(plantName,daysToMaturity,plantSpacing,rowSpacing,image);
   }
 
   @Test

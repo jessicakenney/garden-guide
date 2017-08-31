@@ -26,7 +26,7 @@ public class Sql2oPlantDao implements PlantDao {
     // Create
     @Override
     public void add(Plant plant) {
-        String sql = "INSERT INTO plants (plantName,daysToMaturity,plantSpacing,rowSpacing) VALUES (:plantName,:daysToMaturity,:plantSpacing,:rowSpacing)";
+        String sql = "INSERT INTO plants (plantName,daysToMaturity,plantSpacing,rowSpacing,image) VALUES (:plantName,:daysToMaturity,:plantSpacing,:rowSpacing,:image)";
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql,true)
                     .bind(plant)

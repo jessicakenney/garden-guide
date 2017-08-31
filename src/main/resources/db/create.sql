@@ -3,7 +3,8 @@ CREATE TABLE IF NOT EXISTS plants (
  plantName VARCHAR,
  daysToMaturity INT,
  plantSpacing VARCHAR,
- rowSpacing VARCHAR
+ rowSpacing VARCHAR,
+ image VARCHAR
 );
 
 CREATE TABLE IF NOT EXISTS events (

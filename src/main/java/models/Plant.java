@@ -11,12 +11,14 @@ public class Plant {
     private int daysToMaturity;
     private String plantSpacing;
     private String rowSpacing;
+    private String image;
 
-    public Plant(String plantName, int daysToMaturity,String plantSpacing, String rowSpacing) {
+    public Plant(String plantName, int daysToMaturity,String plantSpacing, String rowSpacing, String image) {
        this.plantName = plantName;
        this.daysToMaturity = daysToMaturity;
        this.plantSpacing = plantSpacing;
        this.rowSpacing = rowSpacing;
+       this.image = image;
     }
 
     public int getId() {
@@ -25,6 +27,14 @@ public class Plant {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getPlantName() {
@@ -69,8 +79,9 @@ public class Plant {
         if (id != plant.id) return false;
         if (daysToMaturity != plant.daysToMaturity) return false;
         if (!plantName.equals(plant.plantName)) return false;
-        if (plantSpacing != null ? !plantSpacing.equals(plant.plantSpacing) : plant.plantSpacing != null) return false;
-        return rowSpacing != null ? rowSpacing.equals(plant.rowSpacing) : plant.rowSpacing == null;
+        if (!plantSpacing.equals(plant.plantSpacing)) return false;
+        if (!rowSpacing.equals(plant.rowSpacing)) return false;
+        return image != null ? image.equals(plant.image) : plant.image == null;
     }
 
     @Override
@@ -78,8 +89,9 @@ public class Plant {
         int result = id;
         result = 31 * result + plantName.hashCode();
         result = 31 * result + daysToMaturity;
-        result = 31 * result + (plantSpacing != null ? plantSpacing.hashCode() : 0);
-        result = 31 * result + (rowSpacing != null ? rowSpacing.hashCode() : 0);
+        result = 31 * result + plantSpacing.hashCode();
+        result = 31 * result + rowSpacing.hashCode();
+        result = 31 * result + (image != null ? image.hashCode() : 0);
         return result;
     }
 }
