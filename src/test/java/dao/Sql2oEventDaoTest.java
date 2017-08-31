@@ -22,7 +22,7 @@ public class Sql2oEventDaoTest {
     @Before
     public void setUp() throws Exception {
         String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        //String connectionString = ("jdbc:postgresql://localhost:5432/garden_guide_test");
+//        String connectionString = ("jdbc:postgresql://localhost:5432/garden_guide_test");
         Sql2o sql2o = new Sql2o(connectionString, null, null);
         eventDao = new Sql2oEventDao(sql2o);
         conn = sql2o.open();
@@ -31,9 +31,10 @@ public class Sql2oEventDaoTest {
     @After
     public void tearDown() throws Exception {
         conn.close();
-        //String sql = "DELETE FROM events *;";
-        //conn.createQuery(sql).executeUpdate();
-        //restart the id
+        String sql = "DELETE FROM events;";
+//        String sql2 = "ALTER SEQUENCE events_id_seq RESTART WITH 1;";
+        conn.createQuery(sql).executeUpdate();
+//        conn.createQuery(sql2).executeUpdate();
     }
 
     //helper

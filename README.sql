@@ -40,7 +40,7 @@ CREATE DATABASE garden_guide;
 CREATE DATABASE garden_guide_test WITH TEMPLATE garden_guide;
 \c garden_guide #connect to database
 >>
-CREATE TABLE plants (id int, plantName varchar, daysToMaturity varchar, plantSpacing varchar, rowSpacing varchar);
+CREATE TABLE plants (id serial PRIMARY KEY, plantName varchar, daysToMaturity varchar, plantSpacing varchar, rowSpacing varchar);
 
 INSERT INTO plants (plantName,daysToMaturity,plantSpacing,rowSpacing) VALUE ("tomato",92,"1 foot","2ft");
 INSERT INTO plants (plantName,daysToMaturity,plantSpacing,rowSpacing) VALUE ("carrot",82,"1 foot","2ft");
