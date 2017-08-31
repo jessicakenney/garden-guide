@@ -10,6 +10,7 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -64,6 +65,17 @@ public class Sql2oGardenPlantDaoTest {
         gardenPlantDao.add(anotherGardenPlant);
         int number = gardenPlantDao.getAll().size();
         assertEquals(2, number);
+    }
+
+    //Needs a test public List<GardenPlant> getAllByGardenId(int gardenId)
+    @Test
+    public void getAllByGardenId_AreFound() throws Exception {
+        GardenPlant gardenPlant = getTestGardenPlant();
+        GardenPlant anotherGardenPlant = getTestGardenPlant();
+        gardenPlantDao.add(gardenPlant);
+        gardenPlantDao.add(anotherGardenPlant);
+        List<GardenPlant>gardenPlants = gardenPlantDao.getAllByGardenId(gardenPlant.getGardenId());
+        assertEquals(2, gardenPlants.size());
     }
 
     @Test

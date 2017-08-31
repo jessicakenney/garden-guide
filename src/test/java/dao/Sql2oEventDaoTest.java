@@ -1,3 +1,4 @@
+package dao;
 import dao.Sql2oEventDao;
 import models.Event;
 import org.junit.After;

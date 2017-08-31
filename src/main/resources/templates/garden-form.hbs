@@ -1,0 +1,19 @@
+{{#partial "content"}}
+
+        <h3>Add a New Garden</h3>
+        <form action="/gardens/new" method="post">
+            <div class="form-group">
+                <label for="userName">Enter UserName</label>
+                <input id="userName" class="form-group" name="userName" type="text" required>
+                <br>
+                <label for="gardenName">Enter GardenName</label>
+                <input id="gardenName" class="form-group" name="gardenName" type="text" required>
+            </div>
+            <br>
+
+    <button type="submit" class="btn btn-default">Create Garden</button>
+    </form>
+
+{{/partial}}
+
+{{> layout.hbs}}

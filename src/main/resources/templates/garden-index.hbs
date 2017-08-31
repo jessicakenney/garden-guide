@@ -1,0 +1,24 @@
+{{#partial "content"}}
+
+    <h2>Garden List</h2>
+
+    {{#if gardens}}
+        {{#each gardens}}
+        <div class="col-md-4">
+            <h3><a href="/gardens/{{ id }}">{{ gardenName }}</a></h3>
+
+        </div>
+        {{/each}}
+    {{else}}
+        <p>No Gardens Created</p>
+    {{/if}}
+
+    <footer class="footer">
+        <div class="container">
+            <br>
+            <a href="/gardens/{{id}}/delete">DELETE All Gardens(no undo)</a></p>
+        </div>
+    </footer>
+{{/partial}}
+
+{{> layout.hbs}}

@@ -1,0 +1,23 @@
+{{#partial "content"}}
+
+    <h2>Your Garden {{ garden.gardenName }}</h2>
+
+    {{#if plants}}
+        {{#each plant}}
+        <div class="col-md-4">
+        <div class = "well" id="all-gardenPlants">
+            <h4>{{ plant.getName  }}</h4>
+        </div>
+        </div>
+        {{/each}}
+    {{else}}
+        <p>No Plants in your Garden</p>
+    {{/if}}
+
+    <footer class="footer">
+        <div class="container">
+        </div>
+    </footer>
+{{/partial}}
+
+{{> layout.hbs}}

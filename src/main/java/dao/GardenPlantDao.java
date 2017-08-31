@@ -14,9 +14,10 @@ public interface GardenPlantDao {
     //Create
     void add(GardenPlant gardenPlant);
 
-    //    //Read
+    //Read
     List<GardenPlant> getAll();
     GardenPlant findById(int id);
+    List<GardenPlant> getAllByGardenId(int gardenId);
 
     //update
     void update(int id, int plantId, int gardenId, Boolean isPlanted, Date datePlanted);

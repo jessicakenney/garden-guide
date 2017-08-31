@@ -44,6 +44,15 @@ public class Sql2oGardenPlantDao implements GardenPlantDao {
                     .executeAndFetch(GardenPlant.class);
         }
     }
+     //Need to add getAllGardenPlantsByGardenId
+    public List<GardenPlant> getAllByGardenId(int gardenId) {
+        String sql = "SELECT * FROM gardenplants WHERE gardenId = :gardenId ";
+        try (Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .addParameter("gardenId", gardenId)
+                    .executeAndFetch(GardenPlant.class);
+        }
+    }
 
     @Override
     public GardenPlant findById(int id) {
