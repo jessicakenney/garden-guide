@@ -58,9 +58,17 @@ public class Sql2oPlantDao implements PlantDao {
         }
     }
 
+    @Override
+    public Plant getByPlantName(String plantName) {
+        String sql = "SELECT * FROM plants WHERE plantName = :plantName";
+        try (Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .addParameter("plantName", plantName)
+                    .executeAndFetchFirst(Plant.class);
+        }
+    }
+
     //Update
-
-
 
     //Delete
     @Override

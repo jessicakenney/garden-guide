@@ -14,8 +14,9 @@ public interface PlantDao {
     //Join to event table?
 
 
-//    //Read
+     //Read
      List<Plant> getAll();
+     Plant getByPlantName(String plantName);
      Plant findById(int id);
 
     //update

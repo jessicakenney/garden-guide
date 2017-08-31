@@ -59,6 +59,14 @@ public class Sql2oPlantDaoTest {
   }
 
   @Test
+  public void getByPlantName_works_great() throws Exception {
+    Plant plant = getTestPlant();
+    plantDao.add(plant);
+    Plant foundPlant = plantDao.getByPlantName(plant.getPlantName());
+    assertEquals(plant, foundPlant);
+  }
+
+  @Test
   public void getAll_allPlantsAreFound() throws Exception {
     Plant plant = getTestPlant();
     Plant anotherPlant = getTestPlant();

@@ -16,6 +16,7 @@ import static spark.Spark.post;
 import static spark.Spark.staticFileLocation;
 
 public class App {
+
     public static void main(String[] args) {
         staticFileLocation("/public");
         Sql2oPlantDao plantDao;
@@ -29,27 +30,35 @@ public class App {
         plantDao = new Sql2oPlantDao(sql2o);
         conn = sql2o.open();
       
-    //----------Plant API EndPoints----------//
+        //----------     API EndPoints     ----------//
 
-    // only admin: Endpoint to Enter Plant JSON file
-    post("/gardenguideapi/plants/new", "application/json", (req, res) -> {
-      Plant[] plantList = gson.fromJson(req.body(), Plant[].class);
-      for (Plant plant: plantList) {
-        plantDao.add(plant);
-      }
-      res.status(201);
+        // Admin API:
+        // Endpoints to Enter JSON files for plants and events
+        post("/gardenguideapi/plants/new", "application/json", (req, res) -> {
+          Plant[] plantList = gson.fromJson(req.body(), Plant[].class);
+          for (Plant plant: plantList) {
+            plantDao.add(plant);
+          }
+          res.status(201);
 
-      return gson.toJson(plantList);
-    });
+          return gson.toJson(plantList);
+        });
 
-    // Get All Recipe cards
-    get("/gardenguideapi/plants", "application/json", (req, res) -> {
-      return gson.toJson(plantDao.getAll());
-    });
+        // Public API:
+        // Get All Plants in database
+        get("/gardenguideapi/plants", "application/json", (req, res) -> {
+          return gson.toJson(plantDao.getAll());
+        });
+
+        // Get Plant Data by name of plant
+        get("/gardenguideapi/plants/:plantName", "application/json", (req, res) -> {
+            String plantName = req.params("plantName");
+            return gson.toJson(plantDao.getByPlantName(plantName));
+        });
 
 
+        //----------     UserInterface     ----------//
 
-  
         // show home page (root route)
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<String, Object>();
