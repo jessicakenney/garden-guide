@@ -77,7 +77,4 @@ public class Sql2oGardenDaoTest {
             assertEquals(0,gardenDao.getAll().size());
         }
 
-
-
-
 }
