@@ -1,5 +1,6 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dao.Sql2oEventDao;
 import dao.Sql2oGardenDao;
 import dao.Sql2oGardenPlantDao;
 import dao.Sql2oPlantDao;
@@ -26,6 +27,7 @@ public class App {
     public static void main(String[] args) {
         staticFileLocation("/public");
         Sql2oPlantDao plantDao;
+        Sql2oEventDao eventDao;
         Sql2oGardenDao gardenDao;
         Sql2oGardenPlantDao gardenPlantDao;
         Connection conn;
@@ -35,7 +37,7 @@ public class App {
         //String connectionString = "jdbc:h2:~/plant.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
         String connectionString = ("jdbc:postgresql://localhost:5432/garden_guide");
 
-        // Need seperate dB for user Garden
+        // Seperate dB for user Garden
         String gardenConnectionString = "jdbc:h2:~/user-garden.db;INIT=RUNSCRIPT from 'classpath:db/garden.sql'";
 
         Sql2o sql2o = new Sql2o(connectionString, null, null);
