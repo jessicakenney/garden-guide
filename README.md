@@ -1,17 +1,40 @@
-# Welcome to Garden Guide!
+# Garden Guide
 
-Plan your season with the Garden Guide. Select a plant and see the best time of the year for planting it, or pick a time of year to see what to plant in your garden.
+##### Epicodus Group Project Java
 
+### By Rich Garrick, Carson Carnales, Jessica Sheridan, David Cuthell
 
+## Description
 
+Plan your vegetable planting season with the Garden Guide. Select a plant and see a wealth
+of information including all planting Date Events and planting attributes
+based on the data for the Portland OR area, USDA Zone 8b, from local gardener's
+favorite Portland Nursery's Veggie Calendar.  
 
-## Setup/Installation Requirements
+## Setup Requirements:
 
-* Clone the repo
-* Open in your favorite editor
-* Run app.java
+* Clone the repo: 
+	git clone https://github.com/jessicakenney/garden-guide.git
+* Generate garden_guide DB:
+	On machine running Postgres, in a terminal, cd to your garden-guide $projectroot dir and run genDB script.
+	(This script requires $projectroot/src/main/resources/db/garden_guide.sql in repo) 
+	$ ./genDB
+   
+![Alt text](src/main/resources/public/images/gendb.png)
 
+* Run App.java and bring up url: localhost:4567 and refer to API documentation in this README and at localhost:4567/api_documentation
 
+## API Documentation
+### Admin Post Endpoints
+#### Endpoints:
+	*localhost:4567/gardenguideapi/plants/new	--Add 1 or more Plant JSON 
+	*localhost:4567/gardenguideapi/events/new	--Add 1 or more Event JSON 
+
+### User Get Endpoints
+#### Endpoints:
+	*localhost:4567/gardenguideapi/plants		--Get All plants JSON in database
+	*localhost:4567/gardenguideapi/:plantName	--Get individual plant data 
+	
 ## Specifications
 
 | Behavior      | Example Input         | Example Output        |
@@ -24,9 +47,12 @@ Plan your season with the Garden Guide. Select a plant and see the best time of 
 ## Known Bugs
 * "Rich Garrick" <richg341@gmail.com>
 
+## Technologies Used
+Java, Spark, Postman, Postgres, SQL
+
 ## Contributing
 
-1. Fork it!
+1. Fork it
 2. Create your feature branch: `git checkout -b my-new-feature`
 3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
