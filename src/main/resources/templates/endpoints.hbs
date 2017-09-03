@@ -7,7 +7,7 @@
         <h3>Getting started</h3>
         <p>Let's make our first API request!</p>
         <p>Open up a terminal and use <a href="http://curl.haxx.se">curl</a> or <a href="http://httpie.org">httpie</a> to make an API request for a resource. In the example below, we're trying to get the first plant, Tomato:</p>
-        <pre><code>http localhost:4567/gardenguideapi/plants
+        <pre><code>localhost:4567/gardenguideapi/plants
 </code></pre>
         <p>We'll use <a href="http://httpie.org">httpie</a> for our examples as it displays responses nicely and gives us a whole lot more useful information. If you don't want to download httpie, just use the <em>curl</em> command instead.</p>
         <p>Here is the response we get:</p>
@@ -50,6 +50,10 @@
   }
 ]
 </code></pre>
+        <p>Or you can try to following code to pull specific plant data:</p>
+        <pre><code>localhost:4567/gardenguideapi/plants/:plantName
+</code></pre>
+
         <p>If your response looks slightly different don't panic. This is probably because more data has been added to Garden Guide API since we made this documentation.</p>
         <p><a name="base"></a></p>
         <h3>Rate limiting</h3>

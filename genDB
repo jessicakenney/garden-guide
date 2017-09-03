@@ -1,0 +1,19 @@
+#!/bin/bash
+#------Create DB------#
+psql -c 'CREATE DATABASE garden_guide'
+psqlcreate_exit_status=$?
+if [ $psqlcreate_exit_status != 0 ]; then
+    echo "psql failed while trying to CREATE DATABASE garden_guide" 1>&2
+    exit $psqlcreate_exit_status
+fi
+#------Populate DB------#
+psql garden_guide < ./src/main/resources/db/garden_guide.sql
+psqlpopulate_exit_status=$?
+
+if [ $psqlpopulate_exit_status != 0 ]; then
+    echo "psql failed while trying to populate garden_guide  with garden_guide.sql " 1>&2
+    exit $psql_exit_status
+fi
+
+echo "sql script successful"
+exit 0

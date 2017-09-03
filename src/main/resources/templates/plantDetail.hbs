@@ -1,13 +1,26 @@
 {{#partial "content"}}
+<div class="well">
+    <p>Plant Name: {{plant.plantName}}</p>
+    <p>Days to Maturity: {{plant.daysToMaturity}}</p>
+    <p>Spacing between Plants: {{plant.plantSpacing}}</p>
+    <p>Spacing between Rows: {{plant.rowSpacing}}</p>
+    <p>Image: <img src="{{plant.image}}" ></p>
+    <p>Planting Guide:</p>
 
-    <p>Plant Name: {{plants.plantName}}</p>
-    <p>Days to Maturity: {{plants.daysToMaturity}}</p>
-    <p>Spacing between Plants: {{plants.plantSpacing}}</p>
-    <p>Spacing between Rows: {{plants.rowSpacing}}</p>
-    <p>Planting Start Date: {{event.startDate}}</p>
-    <p>Planting End Date: {{event.endDate}}</p>
-    <p>Type of Event: {{event.type}}</p>
+    {{#each events}}
+        <ul>
+            <li>Type: {{type}}</li>
+            <li>Start Date: {{startDate}}</li>
+            <li>End Date: {{endDate}}</li>
+        </ul>
 
+    {{/each}}
+
+
+    <!--<p>Planting Start Date: {{event.startDate}}</p>  // new loop for each event-->
+    <!--<p>Planting End Date: {{event.endDate}}</p>-->
+    <!--<p>Type of Event: {{event.type}}</p>-->
+</div>
     <!--<p><a href="/plants/{{plants.id}}/update"><br>Edit Plant details</a></p>-->
 
 {{/partial}}

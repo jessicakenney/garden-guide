@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import dao.Sql2oGardenDao;
 import dao.Sql2oGardenPlantDao;
 import dao.Sql2oPlantDao;
@@ -22,14 +23,13 @@ import static spark.Spark.post;
 import static spark.Spark.staticFileLocation;
 
 public class App {
-
     public static void main(String[] args) {
         staticFileLocation("/public");
         Sql2oPlantDao plantDao;
         Sql2oGardenDao gardenDao;
         Sql2oGardenPlantDao gardenPlantDao;
         Connection conn;
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("MM/dd/yyyy").create();
 
         //Golden Plant DB
         //String connectionString = "jdbc:h2:~/plant.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
@@ -40,6 +40,7 @@ public class App {
 
         Sql2o sql2o = new Sql2o(connectionString, null, null);
         plantDao = new Sql2oPlantDao(sql2o);
+        eventDao = new Sql2oEventDao(sql2o);
         conn = sql2o.open();
 
         Sql2o gardenSql2o = new Sql2o(gardenConnectionString, null, null);
@@ -60,8 +61,17 @@ public class App {
           return gson.toJson(plantList);
         });
 
-        // Public API:
-        // Get All Plants in database
+        post("/gardenguideapi/events/new", "application/json", (req, res) -> {
+            Event[] eventList = gson.fromJson(req.body(), Event[].class);
+            for (Event event: eventList) {
+                eventDao.add(event);
+            }
+            res.status(201);
+
+            return gson.toJson(eventList);
+        });
+
+        // Get All Plants
         get("/gardenguideapi/plants", "application/json", (req, res) -> {
           return gson.toJson(plantDao.getAll());
         });
@@ -196,5 +206,3 @@ public class App {
     }
 
 }
-
-

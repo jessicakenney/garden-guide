@@ -2,9 +2,7 @@ package models;
 
 import java.util.Date;
 
-/**
- * Created by Guest on 8/28/17.
- */
+
 public class Plant {
     private int id;
     private String plantName;

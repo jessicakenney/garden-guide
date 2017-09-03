@@ -32,9 +32,13 @@ html {
 .well {
     background-color: rgba(128, 128, 128, 0.7);
     color: white;
-
 }
 
 #conversions {
     color: black;
+}
+
+.well img {
+    width: 150px;
+    height: 150px;
 }

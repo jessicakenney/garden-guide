@@ -41,7 +41,7 @@ public class Sql2oPlantDao implements PlantDao {
     // Read
     @Override
     public List<Plant> getAll() {
-        String sql = "SELECT * FROM plants ";
+        String sql = "SELECT * FROM plants ORDER BY id ASC";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
                     .executeAndFetch(Plant.class);
