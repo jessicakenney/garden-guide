@@ -13,16 +13,18 @@ favorite Portland Nursery's Veggie Calendar.
 
 ## Setup Requirements:
 
-* Clone the repo: 
-	git clone https://github.com/jessicakenney/garden-guide.git
-* Generate garden_guide DB:
-	On machine running Postgres, in a terminal, cd to your garden-guide $projectroot dir and run genDB script.
-	(This script requires $projectroot/src/main/resources/db/garden_guide.sql in repo) 
-	$ ./genDB
-   
+### Clone the repo: 
+	* git clone https://github.com/jessicakenney/garden-guide.git
+### Generate garden_guide DB (from a machine running Postgres):
+	* In a terminal, cd to your garden-guide project-root dir
+	* run genDB script. (This script requires $project-root/src/main/resources/db/garden_guide.sql in repo) 
+		* $ ./genDB
+
+#### Example:  
 ![Alt text](src/main/resources/public/images/gendb.png)
 
-* Run App.java and bring up url: localhost:4567 and refer to API documentation in this README and at localhost:4567/api_documentation
+	* Run App.java and bring up url: localhost:4567 
+	* Refer to API documentation in this README and at localhost:4567/api_documentation
 
 ## API Documentation
 ### Admin Post Endpoints
