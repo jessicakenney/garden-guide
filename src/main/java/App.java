@@ -131,10 +131,12 @@ public class App {
         get("/plants/:id", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfPlantToFind = Integer.parseInt(req.params("id"));
-            Plant plants = plantDao.findById(idOfPlantToFind);
+            Plant plant = plantDao.findById(idOfPlantToFind);
+            List<Event> events = eventDao.getAllByPlantId(idOfPlantToFind);
             List<Garden> gardens = gardenDao.getAll();
+            model.put("events", events);
             model.put("gardens", gardens);
-            model.put("plants", plants);
+            model.put("plant", plant);
             return new ModelAndView(model, "plantDetail.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -173,35 +175,31 @@ public class App {
             int idOfGarden = Integer.parseInt(req.params("id"));
             Garden garden = gardenDao.findById(idOfGarden);
             // need to get plantid from  gardenPlant using garden id
-            List<GardenPlant> gardenPlants = gardenPlantDao.getAllByGardenId(idOfGarden);
-            List<Plant> plants = new ArrayList<>();
+            List<Integer> plantIds = gardenPlantDao.getAllPlantsByGardenId(idOfGarden);
+            List<Plant> gardenPlants = new ArrayList<>();
             //then for each plantId in gardenplants get all those plants findById
-            //do i want to use a hashmap here to render in details to combine plant/gardenPlant info
-            for (GardenPlant gardenPlant : gardenPlants){
-                int plantId = gardenPlant.getPlantId();
+            for (int plantId : plantIds){
                 Plant plant = plantDao.findById(plantId);
-                plants.add(plant);
+                GardenPlant newGardenPlant = new GardenPlant(plant.getPlantName(), plant.getDaysToMaturity(),plant.getPlantSpacing(),plant.getRowSpacing(),plant.getImage(),plantId,idOfGarden);
+                gardenPlants.add(newGardenPlant);
             }
             model.put("garden", garden);
             model.put("gardenPlants", gardenPlants);
-            model.put("plants", plants);
             return new ModelAndView(model, "garden-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //post: process a form to Add a Plant to A Garden
-        post("/plants/:id", (request,response) -> {
+        // add plant to Garden
+        get("/plants/:plantId/gardens/:gardenId", (request,response) -> {
             Map<String, Object> model = new HashMap<>();
-            String gardenId = request.queryParams("gardenId");
-            String plantId = request.queryParams("plantId");
-            //add plant to Garden
-            response.redirect("/");
+            int plantId = Integer.parseInt(request.params("plantId"));
+            int gardenId = Integer.parseInt(request.params("gardenId"));
+            Plant plant = plantDao.findById(plantId);
+            //GardenPlant newGardenPlant = new GardenPlant(plant.getPlantName(),plant.getDaysToMaturity(),plant.getPlantSpacing(),plant.getRowSpacing(),plant.getImage(),plantId,gardenId);
+            gardenPlantDao.add(plantId,gardenId);
+            //gardenPlantDao.add(newGardenPlant);
+            response.redirect("/gardens/"+gardenId);
             return null;
         }, new HandlebarsTemplateEngine());
-
-
-        // get: a form to Add plant to garden
-        //this needs to live in plant detail
-        //do this after merge with Rich's handlebars
 
         //--------------- Garden Routes End --------------------//
 

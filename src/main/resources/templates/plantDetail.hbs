@@ -4,7 +4,7 @@
     <p>Days to Maturity: {{plant.daysToMaturity}}</p>
     <p>Spacing between Plants: {{plant.plantSpacing}}</p>
     <p>Spacing between Rows: {{plant.rowSpacing}}</p>
-    <p>Image: <img src="{{plant.image}}" ></p>
+    <img src="{{plant.image}}" >
     <p>Planting Guide:</p>
 
     {{#each events}}
@@ -16,12 +16,26 @@
 
     {{/each}}
 
+    <ul class="nav nav-pills">
+    <li role="presentation" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            Add {{ plant.plantName }} to Garden <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            {{#if gardens}}
+                {{#each gardens}}
+                    <li><a href="/plants/{{ plant.id }}/gardens/{{ id }}">{{ gardenName }}</a></li>
+                {{/each}}
+                    <li><a href="/gardens/new">Create a new Garden</a></li>
+             {{else}}
+                  <li><a href="/gardens/new">Create a new Garden</a></li>
+            {{/if}}
+        </ul>
+    </li>
+    </ul>
 
-    <!--<p>Planting Start Date: {{event.startDate}}</p>  // new loop for each event-->
-    <!--<p>Planting End Date: {{event.endDate}}</p>-->
-    <!--<p>Type of Event: {{event.type}}</p>-->
+
 </div>
-    <!--<p><a href="/plants/{{plants.id}}/update"><br>Edit Plant details</a></p>-->
 
 {{/partial}}
 
