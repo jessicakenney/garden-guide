@@ -74,7 +74,7 @@ public class Sql2oGardenPlantDaoTest {
         GardenPlant anotherGardenPlant = getTestGardenPlant();
         gardenPlantDao.add(gardenPlant);
         gardenPlantDao.add(anotherGardenPlant);
-        List<GardenPlant>gardenPlants = gardenPlantDao.getAllByGardenId(gardenPlant.getGardenId());
+        List<GardenPlant>gardenPlants = gardenPlantDao.getAllPlantsByGardenId(gardenPlant.getGardenId());
         assertEquals(2, gardenPlants.size());
     }
 

@@ -12,12 +12,12 @@ import java.util.List;
 public interface GardenPlantDao {
 
     //Create
-    void add(int plantId, int gardenPlant);
+    void add(GardenPlant gardenPlant);
 
     //Read
     List<GardenPlant> getAll();
     GardenPlant findById(int id);
-    List<Integer> getAllPlantsByGardenId(int gardenId);
+    List<GardenPlant> getAllPlantsByGardenId(int gardenId);
 
     //update
     void update(int id, int plantId, int gardenId, Boolean isPlanted, Date datePlanted);

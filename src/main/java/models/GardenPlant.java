@@ -5,13 +5,7 @@ import java.util.Date;
 /**
  * Created by Guest on 8/30/17.
  */
-public class GardenPlant extends Plant {
-    private String plantName;
-    private int daysToMaturity;
-    private String plantSpacing;
-    private String rowSpacing;
-    private String image;
-
+public class GardenPlant {
     private int id;
     private int plantId;
     private int gardenId;
@@ -20,8 +14,7 @@ public class GardenPlant extends Plant {
     //user to be able to add their own images of plant
     //private String image;
 
-    public GardenPlant(String plantName,int daysToMaturity,String plantSpacing,String rowSpacing,String image,int plantId,int gardenId) {
-        super (plantName,daysToMaturity,plantSpacing,rowSpacing,image);
+    public GardenPlant(int plantId,int gardenId) {
         this.plantId = plantId;
         this.gardenId = gardenId;
         this.isPlanted = false;

@@ -14,11 +14,9 @@ import org.sql2o.Sql2o;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import static org.apache.commons.lang3.time.DateUtils.parseDate;
 import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.staticFileLocation;
@@ -175,29 +173,45 @@ public class App {
             int idOfGarden = Integer.parseInt(req.params("id"));
             Garden garden = gardenDao.findById(idOfGarden);
             // need to get plantid from  gardenPlant using garden id
-            List<Integer> plantIds = gardenPlantDao.getAllPlantsByGardenId(idOfGarden);
-            List<Plant> gardenPlants = new ArrayList<>();
-            //then for each plantId in gardenplants get all those plants findById
-            for (int plantId : plantIds){
+            List<GardenPlant> gardenPlants = gardenPlantDao.getAllPlantsByGardenId(idOfGarden);
+            List<Plant> plants = new ArrayList<>();
+            //List<Plant> handleBarPlants = new ArrayList<>();
+            for (GardenPlant gardenPlant : gardenPlants){
+                int plantId = gardenPlant.getPlantId();
                 Plant plant = plantDao.findById(plantId);
-                GardenPlant newGardenPlant = new GardenPlant(plant.getPlantName(), plant.getDaysToMaturity(),plant.getPlantSpacing(),plant.getRowSpacing(),plant.getImage(),plantId,idOfGarden);
-                gardenPlants.add(newGardenPlant);
+                plants.add(plant);
+                //try below
+//                HandleBarPlant handleBarPlant = new HandleBarPlant(plant.getId,plant.getPlantName,plant.getDaysToMaturity(),plant.getPlantSpacing(),plant.getRowSpacing(),plant.getImage(),gardenPlant.getId,gardenPlant.IsPlanted,gardenPlant.getDatePlanted());
+//                handleBarPlants.add(handleBarPlant);
             }
             model.put("garden", garden);
-            model.put("gardenPlants", gardenPlants);
+            model.put("plants", plants);
+            //model.put("plants", handleBarPlants);
+            //model.put("gardenPlants", gardenPlants);
             return new ModelAndView(model, "garden-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
-        // add plant to Garden
+        // add Plant to Garden
         get("/plants/:plantId/gardens/:gardenId", (request,response) -> {
             Map<String, Object> model = new HashMap<>();
             int plantId = Integer.parseInt(request.params("plantId"));
             int gardenId = Integer.parseInt(request.params("gardenId"));
-            Plant plant = plantDao.findById(plantId);
-            //GardenPlant newGardenPlant = new GardenPlant(plant.getPlantName(),plant.getDaysToMaturity(),plant.getPlantSpacing(),plant.getRowSpacing(),plant.getImage(),plantId,gardenId);
-            gardenPlantDao.add(plantId,gardenId);
-            //gardenPlantDao.add(newGardenPlant);
+            GardenPlant newGardenPlant = new GardenPlant(plantId,gardenId);
+            gardenPlantDao.add(newGardenPlant);
             response.redirect("/gardens/"+gardenId);
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        //post: process a form to update a Garden Plant planting date
+        post("/gardens/:gardenId/gardenPlants/:gardenPlantId/update", (request,response) -> {
+            Map<String, Object> model = new HashMap<>();
+            String datePlantedString = request.queryParams("datePlanted");
+            Date datePlanted = parseDate(datePlantedString);
+            int plantId = Integer.parseInt(request.params("plantId"));
+            int gardenId = Integer.parseInt(request.params("gardenId"));
+            int gardenPlantId = Integer.parseInt(request.params("gardenPlantId"));
+            gardenPlantDao.update(gardenPlantId,plantId,gardenId,true,datePlanted);
+            response.redirect("/gardens/:gardenId");
             return null;
         }, new HandlebarsTemplateEngine());
 

@@ -2,16 +2,17 @@
 
     <h2>Your Garden {{ garden.gardenName }}</h2>
 
-    {{#if gardenPlants}}
-        {{#each gardenPlants}}
+    {{#if plants}}
+        {{#each plants }}
         <div class="col-md-4">
         <div class = "well" id="all-gardenPlants">
             <h4>{{ plantName  }}</h4>
             <img src="{{ image }}" >
+            <!--how to render both plants and gardenPlants??-->
         {{#if isPlanted}}
             <h4> Date Planted: {{ datePlanted  }}</h4>
         {{else}}
-            <form action="/gardens/:gardenId/plants/:plantId/update" method="post">
+            <form action="/gardens/{{ garden.id }}/gardenPlants/{{ gardenPlants.id }}/update" method="post">
                 <div class="form-group">
                     <label for="plantDate">Enter Planting Date</label>
                     <input class="form-control" id="plantDate" name="plantDate" type="date" value="2017-10-22" required>

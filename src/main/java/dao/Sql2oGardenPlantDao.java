@@ -22,16 +22,14 @@ public class Sql2oGardenPlantDao implements GardenPlantDao {
 
     // Create
     @Override
-    public void add(int plantId, int gardenId) {
+    public void add(GardenPlant gardenPlant) {
         String sql = "INSERT INTO gardenplants (plantId,gardenId) VALUES (:plantId,:gardenId)";
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql,true)
-                    .addParameter("plantId", plantId)
-                    .addParameter("gardenId", gardenId)
-                    //.bind(gardenPlant)
+                    .bind(gardenPlant)
                     .executeUpdate()
                     .getKey();
-            //gardenPlant.setId(id);
+            gardenPlant.setId(id);
         } catch (Sql2oException ex) {
             System.out.println(ex);
         }
@@ -47,12 +45,12 @@ public class Sql2oGardenPlantDao implements GardenPlantDao {
         }
     }
      //Need to add getAllGardenPlantsByGardenId
-    public List<Integer> getAllPlantsByGardenId(int gardenId) {
-        String sql = "SELECT plantId FROM gardenplants WHERE gardenId = :gardenId ";
+    public List<GardenPlant> getAllPlantsByGardenId(int gardenId) {
+        String sql = "SELECT * FROM gardenplants WHERE gardenId = :gardenId ";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
                     .addParameter("gardenId", gardenId)
-                    .executeAndFetch(Integer.class);
+                    .executeAndFetch(GardenPlant.class);
         }
     }
 
