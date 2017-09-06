@@ -23,7 +23,7 @@ public class Sql2oGardenPlantDao implements GardenPlantDao {
     // Create
     @Override
     public void add(GardenPlant gardenPlant) {
-        String sql = "INSERT INTO gardenplants (plantId,gardenId) VALUES (:plantId,:gardenId)";
+        String sql = "INSERT INTO gardenplants (plantId,gardenId,isPlanted,datePlanted) VALUES (:plantId,:gardenId,:isPlanted,:datePlanted)";
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql,true)
                     .bind(gardenPlant)
@@ -66,15 +66,16 @@ public class Sql2oGardenPlantDao implements GardenPlantDao {
 
     //Update:
     @Override
-    public void update(int id, int plantId, int gardenId, Boolean isPlanted, Date datePlanted ) {
-        String sql = "UPDATE gardenplants SET (id,plantId,gardenId,isPlanted,datePlanted)=(:id,:plantId,:gardenId,:isPlanted,:datePlanted)) WHERE id=:id";
+    public void updatePlanting(int id, String isPlanted, Date datePlanted ) {
+        String sql = "UPDATE gardenplants SET (isPlanted, datePlanted) = (:isPlanted,:datePlanted) WHERE id=:id";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("id", id)
-                    .addParameter("plantId", plantId)
-                    .addParameter("gardenId", gardenId)
                     .addParameter("isPlanted", isPlanted)
                     .addParameter("datePlanted", datePlanted)
+                    .addColumnMapping("ID", "id")
+                    .addColumnMapping("ISPLANTED", "isPlanted")
+                    .addColumnMapping("DATEPLANTED", "datePlanted")
                     .executeUpdate();
         } catch (Sql2oException ex) {
             System.out.println(ex);

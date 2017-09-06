@@ -9,7 +9,7 @@ public class GardenPlant {
     private int id;
     private int plantId;
     private int gardenId;
-    private boolean isPlanted;
+    private String isPlanted;
     private Date datePlanted;
     //user to be able to add their own images of plant
     //private String image;
@@ -17,7 +17,7 @@ public class GardenPlant {
     public GardenPlant(int plantId,int gardenId) {
         this.plantId = plantId;
         this.gardenId = gardenId;
-        this.isPlanted = false;
+        this.isPlanted = "false";
     }
 
     public int getId() {
@@ -44,12 +44,12 @@ public class GardenPlant {
         this.gardenId = gardenId;
     }
 
-    public boolean isPlanted() {
+    public String getIsPlanted() {
         return isPlanted;
     }
 
-    public void setPlanted(boolean planted) {
-        isPlanted = planted;
+    public void setIsPlanted(String isPlanted) {
+        this.isPlanted = isPlanted;
     }
 
     public Date getDatePlanted() {
@@ -70,7 +70,7 @@ public class GardenPlant {
         if (id != that.id) return false;
         if (plantId != that.plantId) return false;
         if (gardenId != that.gardenId) return false;
-        if (isPlanted != that.isPlanted) return false;
+        if (!isPlanted.equals(that.isPlanted)) return false;
         return datePlanted != null ? datePlanted.equals(that.datePlanted) : that.datePlanted == null;
     }
 
@@ -79,7 +79,7 @@ public class GardenPlant {
         int result = id;
         result = 31 * result + plantId;
         result = 31 * result + gardenId;
-        result = 31 * result + (isPlanted ? 1 : 0);
+        result = 31 * result + isPlanted.hashCode();
         result = 31 * result + (datePlanted != null ? datePlanted.hashCode() : 0);
         return result;
     }

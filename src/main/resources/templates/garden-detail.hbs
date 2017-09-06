@@ -8,14 +8,13 @@
         <div class = "well" id="all-gardenPlants">
             <h4>{{ plantName  }}</h4>
             <img src="{{ image }}" >
-            <!--how to render both plants and gardenPlants??-->
         {{#if isPlanted}}
             <h4> Date Planted: {{ datePlanted  }}</h4>
         {{else}}
-            <form action="/gardens/{{ garden.id }}/gardenPlants/{{ gardenPlants.id }}/update" method="post">
+            <form action="/gardens/{{ gardenPlantId }}" method="post">
                 <div class="form-group">
-                    <label for="plantDate">Enter Planting Date</label>
-                    <input class="form-control" id="plantDate" name="plantDate" type="date" value="2017-10-22" required>
+                    <label for="datePlanted">Enter Planting Date</label>
+                    <input class="form-control" id="datePlanted" name="datePlanted" type="date" value="{{ datePlanted }}" required>
                 </div>
             <button type="submit" class="btn btn-default">Add</button>
             </form>

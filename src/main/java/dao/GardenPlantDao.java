@@ -20,7 +20,7 @@ public interface GardenPlantDao {
     List<GardenPlant> getAllPlantsByGardenId(int gardenId);
 
     //update
-    void update(int id, int plantId, int gardenId, Boolean isPlanted, Date datePlanted);
+    void updatePlanting(int id, String isPlanted, Date datePlanted);
 
     //delete
     void deleteById(int id);

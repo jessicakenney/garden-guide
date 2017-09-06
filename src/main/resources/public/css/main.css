@@ -1,5 +1,4 @@
 a, a:hover, a:active, a:visited {
-    color: pink;
 }
 
 #listItem li {
@@ -12,10 +11,10 @@ input[type=text] {
 }
 
 body {
-      background-image: url("/images/background.jpg");
+/**      background-image: url("/images/background.jpg"); **/
       background-size: cover;
       background-repeat: no-repeat;
-      color: white;
+      color: #179CB9;
 }
 
 html {
@@ -30,7 +29,7 @@ html {
 }
 
 .well {
-    background-color: rgba(128, 128, 128, 0.7);
+    background-color: #17B985;
     color: white;
 }
 
