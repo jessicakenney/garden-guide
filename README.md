@@ -11,6 +11,11 @@ of information including all planting Date Events and planting attributes
 based on the data for the Portland OR area, USDA Zone 8b, from local gardener's
 favorite Portland Nursery's Veggie Calendar.  
 
+### Branch: sandbox
+Branch includes functionality built around the API which provides User tracking to create a Garden and add 
+Plants to their specific garden. The user can then enter their actual planting date, which can then be used for
+future revisions to include necessary maintenance notifications and harvest date information. 
+
 ## Setup Requirements:
 
 ### Clone the repo: 
